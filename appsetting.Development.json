@@ -1,0 +1,17 @@
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft": "Warning",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "DB": {
+        "gearhost": "server=den1.mysql1.gear.host;port=3306;database=workit;user id=workit;password=Kq40QP0F5?-b"
+    },
+    "Auth0": {
+        "Domain": "daegemos31.us.auth0.com",
+        "Audience": "https://api/",
+        "ClientId": "j4AhGz15ZMPN6ehGF40BpXfLhoVGa4v3"
+    }
+}
