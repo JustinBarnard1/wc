@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <h1>WC</h1>
@@ -19,7 +19,7 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <div class="d-flex justify-content-end">
         <router-link class="nav-link" :to="{ name: 'Profile' }">
-          <span>Profile</span>
+          <span v-if="profile.name" class="text-dark">Profile</span>
         </router-link>
         <span class="navbar-text">
           <!-- Consider changing this to a profile picture -->
@@ -42,6 +42,11 @@ import { getUserData } from "@bcwdev/auth0-vue";
 import { setBearer, resetBearer } from "../services/AxiosService";
 export default {
   name: "Navbar",
+  computed: {
+    profile() {
+      return this.$store.state.profile;
+    },
+  },
   methods: {
     async login() {
       await this.$auth.loginWithPopup();
