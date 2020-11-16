@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <h1 class="border border-primary">K</h1>
+        <h1 class="border border-primary">WC</h1>
       </div>
     </router-link>
     <button
@@ -17,17 +17,22 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <span class="navbar-text">
-        <!-- Consider changing this to a profile picture -->
-        <button
-          class="btn btn-success"
-          @click="login"
-          v-if="!$auth.isAuthenticated"
-        >
-          Login
-        </button>
-        <button class="btn btn-danger" @click="logout" v-else>logout</button>
-      </span>
+      <div class="d-flex justify-content-end">
+        <router-link class="nav-link" :to="{ name: 'Profile' }">
+          <span>Profile</span>
+        </router-link>
+        <span class="navbar-text">
+          <!-- Consider changing this to a profile picture -->
+          <button
+            class="btn btn-success"
+            @click="login"
+            v-if="!$auth.isAuthenticated"
+          >
+            Login
+          </button>
+          <button class="btn btn-danger" @click="logout" v-else>logout</button>
+        </span>
+      </div>
     </div>
   </nav>
 </template>
