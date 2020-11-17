@@ -9,6 +9,7 @@ export default new Vuex.Store({
     profile: {
       name: "Test"
     },
+    participants: {}
   },
   mutations: {
     setProfile(state, profile) {

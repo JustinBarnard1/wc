@@ -1,11 +1,11 @@
 <template>
-  <div class="leaderboardComp"></div>
+  <div class="participantComp"></div>
 </template>
 
 
 <script>
 export default {
-  name: "leaderboardComp",
+  name: "participantComp",
   data() {
     return {};
   },
