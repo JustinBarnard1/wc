@@ -6,7 +6,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    profile: {},
+    profile: {
+      name: "Test"
+    },
   },
   mutations: {
     setProfile(state, profile) {

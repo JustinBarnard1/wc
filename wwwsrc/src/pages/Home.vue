@@ -1,11 +1,12 @@
 <template>
   <div class="home m-4">
     <div class="row">
-      <div class="col-s-12">
+      <div class="col-12">
         <h3>
           Welcome To WC Where You Can Create Your Own Wellness Challenges And
           Share Them With Your Friends!
-          <button type="button" class="btn btn-primary" @click="login">
+          <button type="button" class="btn btn-primary" @click="toDashboard">
+            <!-- Change @click back to login -->
             Get Started
           </button>
         </h3>
@@ -18,6 +19,7 @@
 <script>
 import { getUserData } from "@bcwdev/auth0-vue";
 import { setBearer, resetBearer } from "../services/AxiosService";
+import router from "../router";
 export default {
   name: "home",
   computed: {
@@ -33,10 +35,13 @@ export default {
         this.$store.dispatch("getProfile");
       }
     },
+    toDashboard() {
+      router.push({ name: "Dashboard" });
+    },
   },
   watch: {
     profile: function (userProfile) {
-      if (userProfile) {
+      if (userProfile.name) {
         router.push({ name: "Dashboard" });
       } else {
         return;
