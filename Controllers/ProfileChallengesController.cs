@@ -7,10 +7,10 @@ namespace Keepr.Controllers
     [Route("api/[controller]")]
     public class ProfileChallengesController : ControllerBase
     {
-        private readonly ProfileChallengesService _rs;
-        public ProfileChallengesController(ProfileChallengesService rs)
+        private readonly ProfileChallengesService _pcs;
+        public ProfileChallengesController(ProfileChallengesService pcs)
         {
-            _rs = rs;
+            _pcs = pcs;
         }
     }
 }
