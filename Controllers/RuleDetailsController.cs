@@ -7,8 +7,8 @@ namespace Keepr.Controllers
     [Route("api/[controller]")]
     public class RuleDetailsController : ControllerBase
     {
-        private readonly RulesService _rds;
-        public RuleDetailsController(RulesService rds)
+        private readonly RuleDetailsService _rds;
+        public RuleDetailsController(RuleDetailsService rds)
         {
             _rds = rds;
         }

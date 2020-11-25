@@ -4,8 +4,8 @@ namespace Keepr.Services
 {
     public class RuleDetailsService
     {
-        private readonly RulesRepository _repo;
-        public RuleDetailsService(RulesRepository repo)
+        private readonly RuleDetailsRepository _repo;
+        public RuleDetailsService(RuleDetailsRepository repo)
         {
             _repo = repo;
         }
