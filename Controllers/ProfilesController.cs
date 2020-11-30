@@ -9,30 +9,46 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Controllers
 {
-  [ApiController]
-  [Route("api/[controller]")]
-  public class ProfilesController : ControllerBase
-  {
-    private readonly ProfilesService _ps;
-    public ProfilesController(ProfilesService ps)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ProfilesController : ControllerBase
     {
-      _ps = ps;
-    }
+        private readonly ProfilesService _ps;
+        public ProfilesController(ProfilesService ps)
+        {
+            _ps = ps;
+        }
 
 
-    [HttpGet]
-    [Authorize]
-    public async Task<ActionResult<Profile>> Get()
-    {
-      try
-      {
-        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-        return Ok(_ps.GetOrCreateProfile(userInfo));
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<Profile>> Get()
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                return Ok(_ps.GetOrCreateProfile(userInfo));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut("{id}")]
+        [Authorize]
+        public async Task<ActionResult<Profile>> Edit(int id, [FromBody] Profile editProfile)
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                editProfile.Id = id.ToString();
+                return Ok(_ps.Edit(id, userInfo, editProfile));
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
-  }
 }
