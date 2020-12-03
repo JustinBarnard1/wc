@@ -28,7 +28,6 @@ namespace Keepr.Controllers
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
                 newPc.CreatorId = userInfo.Id;
                 ProfileChallenge created = _pcs.Create(userInfo.Id, newPc);
-                _cs.AddedToVault(created.ChallengeId);
                 return Ok(created);
             }
             catch (System.Exception e)

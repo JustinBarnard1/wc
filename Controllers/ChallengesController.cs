@@ -20,13 +20,14 @@ namespace Keepr.Controllers
 
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult<Challenge>> Create([FromBody] Challenge newChallenge)
+    public async Task<ActionResult<Challenge>> Create([FromBody] Challenge newC)
     {
         try
         {
             Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
             newChallenge.CreatorId = userInfo.Id;
-            Challenge created = _cs.Create(userInfo.Id, newChallenge);
+            Challenge created = _cs.Create(userInfo.Id, newC);
+            return Ok(created);
         }
         catch (System.Exception e)
         {

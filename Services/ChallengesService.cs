@@ -10,10 +10,5 @@ namespace Keepr.Services
         {
             _repo = repo;
         }
-
-        internal void AddedToVault(string challengeId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
