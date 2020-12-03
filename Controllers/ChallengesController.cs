@@ -16,22 +16,23 @@ namespace Keepr.Controllers
         {
             _cs = cs;
         }
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult<Challenge>> Create([FromBody] Challenge newC)
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                newC.CreatorId = userInfo.Id;
+                Challenge created = _cs.Create(userInfo.Id, newC);
+                return Ok(created);
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 
-    [HttpPost]
-    [Authorize]
-    public async Task<ActionResult<Challenge>> Create([FromBody] Challenge newC)
-    {
-        try
-        {
-            Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-            newChallenge.CreatorId = userInfo.Id;
-            Challenge created = _cs.Create(userInfo.Id, newC);
-            return Ok(created);
-        }
-        catch (System.Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-    }
 }
