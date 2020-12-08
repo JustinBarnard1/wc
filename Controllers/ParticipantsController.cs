@@ -8,9 +8,13 @@ namespace Keepr.Controllers
     public class ParticipantsController : ControllerBase
     {
         private readonly ParticipantsService _ps;
-        public ParticipantsController(ParticipantsService ps)
+        private readonly ChallengesService _cs;
+        public ParticipantsController(ParticipantsService ps, ChallengesService cs)
         {
             _ps = ps;
+            _cs = cs;
         }
+
+
     }
 }
