@@ -1,3 +1,5 @@
+-- DROP TABLE profiles;
+
 CREATE TABLE IF NOT EXISTS profiles
 (
     id VARCHAR(255) NOT NULL,
