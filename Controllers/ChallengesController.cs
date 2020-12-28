@@ -24,7 +24,7 @@ namespace Keepr.Controllers
             {
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
                 newChallenge.CreatorId = userInfo.Id;
-                Challenge created = _cs.Create(userInfo.Id, newChallenge);
+                Challenge created = _cs.Create(newChallenge);
                 return Ok(created);
             }
             catch (System.Exception e)

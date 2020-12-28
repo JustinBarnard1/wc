@@ -12,9 +12,10 @@ namespace Keepr.Services
             _repo = repo;
         }
 
-        internal Challenge Create(string id, Challenge newC)
+        internal Challenge Create(Challenge newC)
         {
-            throw new NotImplementedException();
+            newC.Id = _repo.Create(newC);
+            return newC;
         }
     }
 }

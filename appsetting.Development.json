@@ -7,7 +7,7 @@
         }
     },
     "DB": {
-        "gearhost": "server=den1.mysql1.gear.host;port=3306;database=workit;user id=workit;password=Kq40QP0F5?-b"
+        "gearhost": "server=den1.mysql6.gear.host;port=3306;database=wellnesschalleng;user id=wellnesschalleng;password=Xi5f!~Qjkt25"
     },
     "Auth0": {
         "Domain": "daegemos31.us.auth0.com",
