@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
 
@@ -16,6 +17,11 @@ namespace Keepr.Services
         {
             newC.Id = _repo.Create(newC);
             return newC;
+        }
+
+        internal IEnumerable<Challenge> GetAll()
+        {
+            return _repo.GetAll();
         }
     }
 }

@@ -1,3 +1,5 @@
+using System;
+using Keepr.Models;
 using Keepr.Repositories;
 
 namespace Keepr.Services
@@ -8,6 +10,11 @@ namespace Keepr.Services
         public RuleDetailsService(RuleDetailsRepository repo)
         {
             _repo = repo;
+        }
+
+        internal void Create(RuleDetails newRule)
+        {
+            throw new NotImplementedException();
         }
     }
 }

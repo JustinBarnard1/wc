@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
 using Keepr.Models;
@@ -16,6 +17,20 @@ namespace Keepr.Controllers
         {
             _cs = cs;
         }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Challenge>> Get()
+        {
+            try
+            {
+                return Ok(_cs.GetAll());
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<Challenge>> Create([FromBody] Challenge newChallenge)
