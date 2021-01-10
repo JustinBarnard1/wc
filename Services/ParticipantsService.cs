@@ -1,3 +1,5 @@
+using System;
+using Keepr.Models;
 using Keepr.Repositories;
 
 namespace Keepr.Services
@@ -8,6 +10,11 @@ namespace Keepr.Services
         public ParticipantsService(ParticipantsRepository repo)
         {
             _repo = repo;
+        }
+
+        internal Participant Create(string id, Participant newParticipant)
+        {
+            throw new NotImplementedException();
         }
     }
 }

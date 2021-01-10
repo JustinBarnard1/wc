@@ -1,5 +1,9 @@
 using Keepr.Services;
+using Keepr.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
+using CodeWorks.Auth0Provider;
 
 namespace Keepr.Controllers
 {
@@ -15,6 +19,22 @@ namespace Keepr.Controllers
             _cs = cs;
         }
 
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult<Participant>> Add([FromBody] Participant newParticipant)
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                newParticipant.CreatorId = userInfo.Id;
+                Participant created = _ps.Create(userInfo.Id, newParticipant);
+                return Ok(created);
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
     }
 }
