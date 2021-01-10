@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Dapper;
 using Keepr.Models;
 
@@ -23,6 +24,22 @@ namespace Keepr.Repositories
             (@CreatorId, @Title, @StartDate, @Duration);
             SELECT LAST_INSERT_ID();";
             return _db.ExecuteScalar<int>(sql, newC);
+        }
+
+        internal IEnumerable<Challenge> GetById(string queryId)
+        {
+            string sql = @"
+            SELECT
+            c.*,
+            p.*
+            FROM challenges c
+            JOIN profiles p ON c.creatorId = p.id
+            WHERE c.id = @queryId;";
+            return _db.Query<Challenge, Profile, Challenge>(sql, (challenge, profile) =>
+            {
+                challenge.CreatorId = profile.Id;
+                return challenge;
+            }, new { queryId }, splitOn: "id");
         }
 
         internal IEnumerable<Challenge> GetAll()

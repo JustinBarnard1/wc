@@ -31,6 +31,19 @@ namespace Keepr.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<IEnumerable<Challenge>> GetById(string id)
+        {
+            try
+            {
+                return Ok(_cs.GetById(id));
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<Challenge>> Create([FromBody] Challenge newChallenge)
