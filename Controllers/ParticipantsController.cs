@@ -20,23 +20,6 @@ namespace Keepr.Controllers
             _cs = cs;
         }
 
-        //Does this go in this file? Who should this call to for the list of participants?
-        [HttpGet]
-        [Authorize]
-        public async Task<ActionResult<IEnumerable<Participant>>> GetAllByChallengeId(string challengeId)
-        {
-            try
-            {
-                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-                return Ok();
-
-            }
-            catch (System.Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<Participant>> Add([FromBody] Participant newParticipant)
@@ -44,7 +27,7 @@ namespace Keepr.Controllers
             try
             {
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-                newParticipant.CreatorId = userInfo.Id;
+                newParticipant.Creator = userInfo;
                 Participant created = _ps.Create(userInfo.Id, newParticipant);
                 return Ok(created);
             }

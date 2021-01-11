@@ -44,6 +44,23 @@ namespace Keepr.Controllers
             }
         }
 
+        //Does this go in this file? Who should this call to for the list of participants?
+        [HttpGet("{id}/participants")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<Participant>>> GetAllByChallengeId(string challengeId)
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                return Ok();
+
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<Challenge>> Create([FromBody] Challenge newChallenge)
