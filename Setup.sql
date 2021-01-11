@@ -1,4 +1,4 @@
-DROP TABLE challenges;
+-- DROP TABLE participants;
 
 CREATE TABLE IF NOT EXISTS profiles
 (
@@ -26,6 +26,6 @@ CREATE TABLE IF NOT EXISTS participants
     challengeId VARCHAR(255) NOT NULL,
     totalPoints INT DEFAULT 0,
     creatorId VARCHAR(255) NOT NULL,
-    isAllowed TINYINT DEFAULT 0,
+    isAllowed TINYINT,
     PRIMARY KEY (id)
 );
