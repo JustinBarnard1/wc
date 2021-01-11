@@ -24,7 +24,7 @@ namespace Keepr.Services
             return _repo.GetAll();
         }
 
-        internal IEnumerable<Challenge> GetById(string id)
+        internal Challenge GetById(string id)
         {
             return _repo.GetById(id);
         }

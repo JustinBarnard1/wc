@@ -26,7 +26,7 @@ namespace Keepr.Repositories
             return _db.ExecuteScalar<int>(sql, newC);
         }
 
-        internal IEnumerable<Challenge> GetById(string queryId)
+        internal Challenge GetById(string queryId)
         {
             string sql = @"
             SELECT
@@ -39,7 +39,7 @@ namespace Keepr.Repositories
             {
                 challenge.CreatorId = profile.Id;
                 return challenge;
-            }, new { queryId }, splitOn: "id");
+            }, new { queryId }, splitOn: "id").FirstOrDefault();
         }
 
         internal IEnumerable<Challenge> GetAll()
