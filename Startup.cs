@@ -59,6 +59,8 @@ namespace Keepr
             services.AddTransient<ProfilesRepository>();
             services.AddTransient<ChallengesService>();
             services.AddTransient<ChallengesRepository>();
+            services.AddTransient<ParticipantsService>();
+            services.AddTransient<ParticipantsRepository>();
         }
 
         private IDbConnection CreateDbConnection()
