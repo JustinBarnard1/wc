@@ -25,7 +25,6 @@ CREATE TABLE IF NOT EXISTS participants
     profileId VARCHAR(255) NOT NULL,
     challengeId VARCHAR(255) NOT NULL,
     totalPoints INT DEFAULT 0,
-    creatorId VARCHAR(255) NOT NULL,
-    isAllowed TINYINT,
+    isAllowed TINYINT DEFAULT NULL,
     PRIMARY KEY (id)
 );

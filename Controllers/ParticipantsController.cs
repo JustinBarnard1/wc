@@ -27,8 +27,9 @@ namespace Keepr.Controllers
             try
             {
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                newParticipant.ProfileId = userInfo.Id;
                 newParticipant.Creator = userInfo;
-                Participant created = _ps.Create(userInfo.Id, newParticipant);
+                Participant created = _ps.Create(newParticipant);
                 return Ok(created);
             }
             catch (System.Exception e)

@@ -49,7 +49,7 @@ namespace Keepr.Controllers
         //Does this go in this file? Who should this call to for the list of participants?
         [HttpGet("{id}/participants")]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<Participant>>> GetAllByChallengeId(string id)
+        public async Task<ActionResult<IEnumerable<Participant>>> GetAllByChallengeId(int id)
         {
             try
             {

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Keepr.Models;
 using Keepr.Repositories;
 
@@ -14,17 +16,17 @@ namespace Keepr.Services
             _cRepo = cRepo;
         }
 
-        internal Participant Create(string id, Participant newParticipant)
+        internal Participant Create(Participant newParticipant)
         {
             newParticipant.Id = _repo.Create(newParticipant);
             return newParticipant;
         }
 
-        internal object GetAllParticipantsByChallengeId(string userId, string challengeId)
+        internal IEnumerable<Participant> GetAllParticipantsByChallengeId(string userId, int challengeId)
         {
-            Challenge challenge = _cRepo.GetById(challengeId);
+            Challenge challenge = _cRepo.GetById(challengeId.ToString());
             if (challenge == null) { throw new Exception("Invalid Id"); }
-            return _repo.GetAllParticipantsByChallengeId(challengeId);
+            return _repo.GetAllParticipantsByChallengeId(challengeId).ToList();
         }
     }
 }
