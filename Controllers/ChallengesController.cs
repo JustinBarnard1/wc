@@ -13,9 +13,11 @@ namespace Keepr.Controllers
     public class ChallengesController : ControllerBase
     {
         private readonly ChallengesService _cs;
-        public ChallengesController(ChallengesService cs)
+        private readonly ParticipantsService _ps;
+        public ChallengesController(ChallengesService cs, ParticipantsService ps)
         {
             _cs = cs;
+            _ps = ps;
         }
 
         [HttpGet]
@@ -47,12 +49,12 @@ namespace Keepr.Controllers
         //Does this go in this file? Who should this call to for the list of participants?
         [HttpGet("{id}/participants")]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<Participant>>> GetAllByChallengeId(string challengeId)
+        public async Task<ActionResult<IEnumerable<Participant>>> GetAllByChallengeId(string id)
         {
             try
             {
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-                return Ok();
+                return Ok(_ps.GetAllParticipantsByChallengeId(userInfo?.Id, id));
 
             }
             catch (System.Exception e)
