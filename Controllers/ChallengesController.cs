@@ -63,6 +63,23 @@ namespace Keepr.Controllers
             }
         }
 
+        //Do I need this or can I select based on info already being in the store?
+
+        [HttpGet("{cId}/participants/{pId}")]
+        [Authorize]
+        public async Task<ActionResult<Participant>> GetParticipant(int cId, int pId)
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                return Ok(_ps.GetParticipant(userInfo?.Id, cId, pId));
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<Challenge>> Create([FromBody] Challenge newChallenge)

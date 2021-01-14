@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Dapper;
 using Keepr.Models;
 
@@ -39,6 +40,24 @@ namespace Keepr.Repositories
             {
                 participant.Creator = profile; return participant;
             }, new { challengeId }, splitOn: "id");
+        }
+
+        internal Participant GetParticipant(int challengeId, int participantId)
+        {
+            string sql = @"
+            SELECT
+            par.*,
+            p.*
+            FROM
+            participants par
+            JOIN profiles p ON par.profileId = p.id
+            WHERE
+            par.challengeId = @challengeId,
+            par.id = @participantId;";
+            return _db.Query<Participant, Profile, Participant>(sql, (participant, profile) =>
+            {
+                participant.Creator = profile; return participant;
+            }, new { challengeId }, splitOn: "id").FirstOrDefault();
         }
     }
 }

@@ -28,5 +28,13 @@ namespace Keepr.Services
             if (challenge == null) { throw new Exception("Invalid Id"); }
             return _repo.GetAllParticipantsByChallengeId(challengeId).ToList();
         }
+
+        internal Participant GetParticipant(string userId, int challengeId, int participantId)
+        {
+            Challenge challenge = _cRepo.GetById(challengeId.ToString());
+            if (challenge == null) { throw new Exception("Invalid Challenge Id"); }
+            return _repo.GetParticipant(challengeId, participantId);
+
+        }
     }
 }
