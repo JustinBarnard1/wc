@@ -26,5 +26,6 @@ CREATE TABLE IF NOT EXISTS participants
     challengeId VARCHAR(255) NOT NULL,
     totalPoints INT DEFAULT 0,
     isAllowed TINYINT DEFAULT NULL,
+    addedToChallenge TINYINT DEFAULT NULL,
     PRIMARY KEY (id)
 );

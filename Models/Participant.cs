@@ -8,5 +8,6 @@ namespace Keepr.Models
         public int TotalPoints { get; set; }
         public Profile Creator { get; set; }
         public bool IsAllowed { get; set; }
+        public bool AddedToChallenge { get; set; }
     }
 }
