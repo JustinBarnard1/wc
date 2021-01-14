@@ -7,7 +7,7 @@ namespace Keepr.Models
         public string ChallengeId { get; set; }
         public int TotalPoints { get; set; }
         public Profile Creator { get; set; }
-        public bool IsAllowed { get; set; }
+        public bool PendingAddToChallenge { get; set; }
         public bool AddedToChallenge { get; set; }
     }
 }
