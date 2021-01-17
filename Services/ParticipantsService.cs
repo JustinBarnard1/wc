@@ -49,7 +49,6 @@ namespace Keepr.Services
             if (original.PendingAddToChallenge == false && original.AddedToChallenge == true) { throw new Exception("User Already Granted Access"); }
             participant.ProfileId = original.ProfileId;
             participant.ChallengeId = original.ChallengeId;
-            participant.TotalPoints = original.TotalPoints;
             if (participant.AcceptOrDeny == 0)
             {
                 participant.PendingAddToChallenge = false;

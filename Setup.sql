@@ -1,4 +1,4 @@
--- DROP TABLE participants;
+/* DROP TABLE participants; */
 
 CREATE TABLE IF NOT EXISTS profiles
 (
@@ -24,7 +24,6 @@ CREATE TABLE IF NOT EXISTS participants
     id INT AUTO_INCREMENT,
     profileId VARCHAR(255) NOT NULL,
     challengeId VARCHAR(255) NOT NULL,
-    totalPoints INT DEFAULT 0,
     pendingAddToChallenge TINYINT DEFAULT 1,
     addedToChallenge TINYINT DEFAULT NULL,
     PRIMARY KEY (id)
