@@ -10,4 +10,9 @@ namespace Keepr.Models
         public bool PendingAddToChallenge { get; set; }
         public bool AddedToChallenge { get; set; }
     }
+
+    public class VMParticipant : Participant
+    {
+        public int AcceptOrDeny { get; set; }
+    }
 }

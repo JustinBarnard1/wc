@@ -38,5 +38,21 @@ namespace Keepr.Controllers
             }
         }
 
+        [HttpPut]
+        [Authorize]
+        public async Task<ActionResult<VMParticipant>> AcceptOrDenyParticipant([FromBody] VMParticipant participant)
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                VMParticipant edited = _ps.AcceptOrDenyParticipant(userInfo.Id, participant);
+                return Ok(edited);
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }

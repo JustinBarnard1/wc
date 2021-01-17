@@ -59,5 +59,34 @@ namespace Keepr.Repositories
                 participant.Creator = profile; return participant;
             }, new { challengeId }, splitOn: "id").FirstOrDefault();
         }
+
+        internal Participant GetSelectedParticipant(int id)
+        {
+            string sql = @"
+            SELECT
+            par.*,
+            p.*
+            FROM
+            participants par
+            JOIN profiles p ON par.profileId = p.Id
+            WHERE
+            par.id = @id;";
+            return _db.Query<Participant, Profile, Participant>(sql, (participant, profile) =>
+            {
+                participant.Creator = profile; return participant;
+            }, new { id }, splitOn: "id").FirstOrDefault();
+        }
+
+        internal VMParticipant AcceptOrDenyParticipant(VMParticipant participant)
+        {
+            string sql = @"
+            UPDATE participants
+            SET
+            pendingAddToChallenge = @PendingAddToChallenge,
+            addedToChallenge = @AddedToChallenge
+            WHERE id = @Id;";
+            _db.Execute(sql, participant);
+            return participant;
+        }
     }
 }

@@ -36,5 +36,34 @@ namespace Keepr.Services
             return _repo.GetParticipant(challengeId, participantId);
 
         }
+
+        internal VMParticipant AcceptOrDenyParticipant(string userId, VMParticipant participant)
+        {
+            Challenge challenge = _cRepo.GetById(participant.ChallengeId);
+            Participant original = _repo.GetSelectedParticipant(participant.Id);
+            if (challenge.CreatorId != userId) { throw new Exception("You Do Not Have The Authority For This"); }
+            if (challenge == null) { throw new Exception("Challenge Does Not Exist"); }
+            if (original == null) { throw new Exception("Invalid Participant Id"); }
+            //For testing in postman original.Pendi... should be changed to participant.Pendi...
+            if (original.PendingAddToChallenge == false && original.AddedToChallenge == false) { throw new Exception("User Already Denied Access"); }
+            if (original.PendingAddToChallenge == false && original.AddedToChallenge == true) { throw new Exception("User Already Granted Access"); }
+            if (participant.AcceptOrDeny == 0)
+            {
+                participant.ProfileId = original.ProfileId;
+                participant.ChallengeId = original.ChallengeId;
+                participant.TotalPoints = original.TotalPoints;
+                participant.PendingAddToChallenge = false;
+                participant.AddedToChallenge = false;
+                return _repo.AcceptOrDenyParticipant(participant);
+            }
+            participant.ProfileId = original.ProfileId;
+            participant.ChallengeId = original.ChallengeId;
+            participant.TotalPoints = original.TotalPoints;
+            participant.PendingAddToChallenge = false;
+            participant.AddedToChallenge = true;
+            //This needs to create all the daily sheets based on challenge start date and duration.
+            return _repo.AcceptOrDenyParticipant(participant);
+
+        }
     }
 }
