@@ -47,18 +47,15 @@ namespace Keepr.Services
             //For testing in postman original.Pendi... should be changed to participant.Pendi...
             if (original.PendingAddToChallenge == false && original.AddedToChallenge == false) { throw new Exception("User Already Denied Access"); }
             if (original.PendingAddToChallenge == false && original.AddedToChallenge == true) { throw new Exception("User Already Granted Access"); }
+            participant.ProfileId = original.ProfileId;
+            participant.ChallengeId = original.ChallengeId;
+            participant.TotalPoints = original.TotalPoints;
             if (participant.AcceptOrDeny == 0)
             {
-                participant.ProfileId = original.ProfileId;
-                participant.ChallengeId = original.ChallengeId;
-                participant.TotalPoints = original.TotalPoints;
                 participant.PendingAddToChallenge = false;
                 participant.AddedToChallenge = false;
                 return _repo.AcceptOrDenyParticipant(participant);
             }
-            participant.ProfileId = original.ProfileId;
-            participant.ChallengeId = original.ChallengeId;
-            participant.TotalPoints = original.TotalPoints;
             participant.PendingAddToChallenge = false;
             participant.AddedToChallenge = true;
             //This needs to create all the daily sheets based on challenge start date and duration.
