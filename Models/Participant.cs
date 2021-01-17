@@ -15,4 +15,5 @@ namespace Keepr.Models
     {
         public int AcceptOrDeny { get; set; }
     }
+
 }
