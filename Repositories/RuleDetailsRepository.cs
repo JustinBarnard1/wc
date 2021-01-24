@@ -29,5 +29,10 @@ namespace Keepr.Repositories
                 ruleDetails.Creator = profile; return ruleDetails;
             }, new { challengeId }, splitOn: "id");
         }
+
+        internal void CreateNewRule(RuleDetails newRule)
+        {
+            // Create new rule
+        }
     }
 }

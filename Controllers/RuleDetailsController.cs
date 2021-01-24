@@ -26,9 +26,7 @@ namespace Keepr.Controllers
             {
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
                 newRule.CreatorId = userInfo.Id;
-                _rds.Create(newRule);
-
-                // finish getchallengebyid first
+                _rds.Create(userInfo, newRule);
                 return Ok(newRule);
             }
             catch (System.Exception e)
