@@ -28,3 +28,15 @@ CREATE TABLE IF NOT EXISTS participants
     addedToChallenge TINYINT DEFAULT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE IF NOT EXISTS ruleDetails
+(
+    id INT AUTO_INCREMENT,
+    challengeId VARCHAR(255) NOT NULL,
+    creatorId VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    minPoint INT NOT NULL,
+    maxPoint INT NOT NULL,
+    PRIMARY KEY (id)
+);

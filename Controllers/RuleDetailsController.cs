@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
+using System.Collections.Generic;
 
 namespace Keepr.Controllers
 {
@@ -29,6 +30,22 @@ namespace Keepr.Controllers
 
                 // finish getchallengebyid first
                 return Ok(newRule);
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<RuleDetails>>> GetAllRulesByChallengeId(int challengeId)
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                return Ok(_rds.GetAllRulesByChallengeId(userInfo, challengeId));
+
             }
             catch (System.Exception e)
             {
