@@ -14,10 +14,12 @@ namespace Keepr.Controllers
     {
         private readonly ChallengesService _cs;
         private readonly ParticipantsService _ps;
-        public ChallengesController(ChallengesService cs, ParticipantsService ps)
+        private readonly RuleDetailsService _rs;
+        public ChallengesController(ChallengesService cs, ParticipantsService ps, RuleDetailsService rs)
         {
             _cs = cs;
             _ps = ps;
+            _rs = rs;
         }
 
         [HttpGet]
@@ -39,6 +41,22 @@ namespace Keepr.Controllers
             try
             {
                 return Ok(_cs.GetById(id));
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("{id}/ruledetails")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<RuleDetails>>> GetAllRulesByChallengeId(int id)
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                return Ok(_rs.GetAllRulesByChallengeId(userInfo, id));
+
             }
             catch (System.Exception e)
             {

@@ -1,4 +1,4 @@
-/* DROP TABLE participants; */
+DROP TABLE ruleDetails;
 
 CREATE TABLE IF NOT EXISTS profiles
 (
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS participants
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS ruleDetails
+CREATE TABLE IF NOT EXISTS rules
 (
     id INT AUTO_INCREMENT,
     challengeId VARCHAR(255) NOT NULL,

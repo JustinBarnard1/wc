@@ -15,12 +15,12 @@ namespace Keepr.Services
             _cRepo = cRepo;
         }
 
-        internal string Create(Profile user, RuleDetails newRule)
+        internal RuleDetails Create(Profile user, RuleDetails newRule)
         {
             Challenge challenge = _cRepo.GetById(newRule.ChallengeId);
             if (user.Id != challenge.CreatorId) { throw new Exception("This Is Not Yours"); }
-            _repo.CreateNewRule(newRule);
-            return ("Created Successfully");
+            newRule.Id = _repo.CreateNewRule(newRule);
+            return newRule;
         }
 
         internal IEnumerable<RuleDetails> GetAllRulesByChallengeId(Profile user, int challengeId)

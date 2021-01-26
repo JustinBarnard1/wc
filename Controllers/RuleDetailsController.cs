@@ -26,7 +26,8 @@ namespace Keepr.Controllers
             {
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
                 newRule.CreatorId = userInfo.Id;
-                _rds.Create(userInfo, newRule);
+                newRule.Creator = userInfo;
+                RuleDetails rule = _rds.Create(userInfo, newRule);
                 return Ok(newRule);
             }
             catch (System.Exception e)
@@ -35,20 +36,5 @@ namespace Keepr.Controllers
             }
         }
 
-        [HttpGet]
-        [Authorize]
-        public async Task<ActionResult<IEnumerable<RuleDetails>>> GetAllRulesByChallengeId(int challengeId)
-        {
-            try
-            {
-                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-                return Ok(_rds.GetAllRulesByChallengeId(userInfo, challengeId));
-
-            }
-            catch (System.Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
     }
 }

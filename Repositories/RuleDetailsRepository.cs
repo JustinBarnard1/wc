@@ -21,7 +21,7 @@ namespace Keepr.Repositories
             r.*,
             p.*
             FROM
-            ruleDetails r
+            rules r
             JOIN profiles p ON r.creatorId = p.id
             WHERE r.challengeId = @challengeId;";
             return _db.Query<RuleDetails, Profile, RuleDetails>(sql, (ruleDetails, profile) =>
@@ -30,9 +30,15 @@ namespace Keepr.Repositories
             }, new { challengeId }, splitOn: "id");
         }
 
-        internal void CreateNewRule(RuleDetails newRule)
+        internal int CreateNewRule(RuleDetails newRule)
         {
-            // Create new rule
+            string sql = @"
+            INSERT INTO rules
+            (challengeId, creatorId, title, description, minPoint, maxPoint)
+            VALUES
+            (@ChallengeId, @CreatorId, @Title, @Description, @MinPoint, @MaxPoint);
+            SELECT LAST_INSERT_ID();";
+            return _db.ExecuteScalar<int>(sql, newRule);
         }
     }
 }
