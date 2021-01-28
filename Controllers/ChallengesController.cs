@@ -22,6 +22,7 @@ namespace Keepr.Controllers
             _rs = rs;
         }
 
+        //ANCHOR This gets all created challenges.
         [HttpGet]
         public ActionResult<IEnumerable<Challenge>> Get()
         {
@@ -35,6 +36,7 @@ namespace Keepr.Controllers
             }
         }
 
+        //ANCHOR This gets a specific challenge.
         [HttpGet("{id}")]
         public ActionResult<IEnumerable<Challenge>> GetById(string id)
         {
@@ -48,6 +50,7 @@ namespace Keepr.Controllers
             }
         }
 
+        //ANCHOR This gets all rules for a specific challenge.
         [HttpGet("{id}/ruledetails")]
         [Authorize]
         public async Task<ActionResult<IEnumerable<RuleDetails>>> GetAllRulesByChallengeId(int id)
@@ -64,7 +67,7 @@ namespace Keepr.Controllers
             }
         }
 
-        //Does this go in this file? Who should this call to for the list of participants?
+        //NOTE Does this go in this file? Who should this call to for the list of participants?
         [HttpGet("{id}/participants")]
         [Authorize]
         public async Task<ActionResult<IEnumerable<Participant>>> GetAllByChallengeId(int id)
@@ -81,7 +84,7 @@ namespace Keepr.Controllers
             }
         }
 
-        //Do I need this or can I select based on info already being in the store?
+        //NOTE Do I need this or can I select based on info already being in the store?
 
         [HttpGet("{cId}/participants/{pId}")]
         [Authorize]
@@ -98,6 +101,7 @@ namespace Keepr.Controllers
             }
         }
 
+        //ANCHOR This creates a new challenge.
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<Challenge>> Create([FromBody] Challenge newChallenge)
