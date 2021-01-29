@@ -20,6 +20,9 @@ namespace Keepr.Controllers
             _cs = cs;
         }
 
+        //ANCHOR This is the user request to join a Challenge. It creates a
+        //ANCHOR participant but must be approved by the creator to be officially
+        //ANCHOR joined into the challenge.
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<Participant>> Add([FromBody] Participant newParticipant)
@@ -38,6 +41,8 @@ namespace Keepr.Controllers
             }
         }
 
+        //ANCHOR The creator of the challenge is accepting/denying the participant's
+        //ANCHOR request to join the challenge. 
         [HttpPut]
         [Authorize]
         public async Task<ActionResult<VMParticipant>> AcceptOrDenyParticipant([FromBody] VMParticipant participant)
