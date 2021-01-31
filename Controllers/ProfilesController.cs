@@ -19,7 +19,8 @@ namespace Keepr.Controllers
             _ps = ps;
         }
 
-
+        //ANCHOR Gets User's Profile if already exists if not creates a profile
+        //ANCHOR for the user.
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<Profile>> Get()
@@ -35,6 +36,7 @@ namespace Keepr.Controllers
             }
         }
 
+        //ANCHOR Edit's a User's profile information.
         [HttpPut("{id}")]
         [Authorize]
         public async Task<ActionResult<Profile>> Edit(int id, [FromBody] Profile editProfile)
