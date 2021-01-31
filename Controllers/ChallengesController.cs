@@ -119,6 +119,8 @@ namespace Keepr.Controllers
             }
         }
 
+        //ANCHOR Edits challenge to finalize creation of challenge to
+        //ANCHOR allows users to apply to join as a participant.
         [HttpPut("{id}")]
         [Authorize]
         public async Task<ActionResult<Challenge>> Joinable(int id, [FromBody] Challenge editChallenge)
