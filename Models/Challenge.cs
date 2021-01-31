@@ -7,5 +7,6 @@ namespace Keepr.Models
         public string StartDate { get; set; }
         public int Duration { get; set; }
         public string CreatorId { get; set; }
+        public bool Joinable { get; set; }
     }
 }

@@ -67,7 +67,7 @@ namespace Keepr.Controllers
             }
         }
 
-        //NOTE Does this go in this file? Who should this call to for the list of participants?
+        //ANCHOR Gets all participants of a challenge.
         [HttpGet("{id}/participants")]
         [Authorize]
         public async Task<ActionResult<IEnumerable<Participant>>> GetAllByChallengeId(int id)
@@ -119,6 +119,20 @@ namespace Keepr.Controllers
             }
         }
 
+        [HttpPut("{id}")]
+        [Authorize]
+        public async Task<ActionResult<Challenge>> Joinable(int id, [FromBody] Challenge editChallenge)
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                editChallenge.Id = id;
+                return Ok(_cs.Joinable(id, userInfo, editChallenge));
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
-
 }

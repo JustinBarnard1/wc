@@ -28,5 +28,18 @@ namespace Keepr.Services
         {
             return _repo.GetById(id);
         }
+
+        internal Challenge Joinable(int id, Profile userInfo, Challenge editChallenge)
+        {
+            Challenge challenge = _repo.GetById(id.ToString());
+            if (challenge == null) { throw new Exception("Invalid Challenge Id"); }
+            if (userInfo.Id != challenge.CreatorId) { throw new Exception("This is not yours"); }
+            editChallenge.Title = challenge.Title;
+            editChallenge.StartDate = challenge.StartDate;
+            editChallenge.Duration = challenge.Duration;
+            editChallenge.CreatorId = challenge.CreatorId;
+            return _repo.Joinable(editChallenge);
+
+        }
     }
 }

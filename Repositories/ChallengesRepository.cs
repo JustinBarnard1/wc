@@ -19,9 +19,9 @@ namespace Keepr.Repositories
         {
             string sql = @"
             INSERT INTO challenges
-            (creatorId, title, startDate, duration)
+            (creatorId, title, startDate, duration, joinable)
             VALUES
-            (@CreatorId, @Title, @StartDate, @Duration);
+            (@CreatorId, @Title, @StartDate, @Duration, @Joinable);
             SELECT LAST_INSERT_ID();";
             return _db.ExecuteScalar<int>(sql, newC);
         }
@@ -55,6 +55,17 @@ namespace Keepr.Repositories
                 challenge.CreatorId = profile.Id;
                 return challenge;
             }, splitOn: "id");
+        }
+
+        internal Challenge Joinable(Challenge editChallenge)
+        {
+            string sql = @"
+            UPDATE challenges
+            SET
+            joinable = @Joinable
+            WHERE id = @Id;";
+            _db.Execute(sql, editChallenge);
+            return editChallenge;
         }
     }
 }
