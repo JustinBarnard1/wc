@@ -1,4 +1,4 @@
-/* DROP TABLE challenges; */
+DROP TABLE challenges;
 
 CREATE TABLE IF NOT EXISTS profiles
 (
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS challenges
     startDate DATE NOT NULL,
     duration INT NOT NULL,
     creatorId VARCHAR(255) NOT NULL,
-    joinable TINYINT DEFAULT 0,
+    joinable TINYINT NOT NULL,
     PRIMARY KEY (id)
 );
 
