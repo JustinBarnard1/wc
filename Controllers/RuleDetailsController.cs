@@ -18,6 +18,7 @@ namespace Keepr.Controllers
             _rds = rds;
         }
 
+        //ANCHOR Creates a new rule for a challenge.
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<RuleDetails>> Create([FromBody] RuleDetails newRule)
