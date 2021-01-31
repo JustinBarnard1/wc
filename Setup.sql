@@ -1,4 +1,4 @@
-DROP TABLE challenges;
+/* DROP TABLE challenges; */
 
 CREATE TABLE IF NOT EXISTS profiles
 (
