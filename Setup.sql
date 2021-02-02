@@ -1,4 +1,4 @@
-/* DROP TABLE challenges; */
+/* DROP TABLE rules; */
 
 CREATE TABLE IF NOT EXISTS profiles
 (
@@ -39,5 +39,6 @@ CREATE TABLE IF NOT EXISTS rules
     description VARCHAR(255) NOT NULL,
     minPoint INT NOT NULL,
     maxPoint INT NOT NULL,
+    weekly TINYINT NOT NULL,
     PRIMARY KEY (id)
 );

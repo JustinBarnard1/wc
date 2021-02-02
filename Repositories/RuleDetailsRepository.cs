@@ -34,9 +34,9 @@ namespace Keepr.Repositories
         {
             string sql = @"
             INSERT INTO rules
-            (challengeId, creatorId, title, description, minPoint, maxPoint)
+            (challengeId, creatorId, title, description, minPoint, maxPoint, weekly)
             VALUES
-            (@ChallengeId, @CreatorId, @Title, @Description, @MinPoint, @MaxPoint);
+            (@ChallengeId, @CreatorId, @Title, @Description, @MinPoint, @MaxPoint, @Weekly);
             SELECT LAST_INSERT_ID();";
             return _db.ExecuteScalar<int>(sql, newRule);
         }

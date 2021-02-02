@@ -10,5 +10,6 @@ namespace Keepr.Models
         public Profile Creator { get; set; }
         public int MinPoint { get; set; }
         public int MaxPoint { get; set; }
+        public bool Weekly { get; set; }
     }
 }
