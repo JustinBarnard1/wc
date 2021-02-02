@@ -36,7 +36,7 @@ namespace Keepr.Services
             if (userInfo.Id != challenge.CreatorId) { throw new Exception("This is not yours"); }
             editChallenge.Title = challenge.Title;
             editChallenge.StartDate = challenge.StartDate;
-            editChallenge.Duration = challenge.Duration;
+            editChallenge.EndDate = challenge.EndDate;
             editChallenge.CreatorId = challenge.CreatorId;
             return _repo.Joinable(editChallenge);
 

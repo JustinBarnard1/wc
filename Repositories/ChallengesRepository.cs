@@ -19,9 +19,9 @@ namespace Keepr.Repositories
         {
             string sql = @"
             INSERT INTO challenges
-            (creatorId, title, startDate, duration, joinable)
+            (creatorId, title, startDate, endDate, joinable)
             VALUES
-            (@CreatorId, @Title, @StartDate, @Duration, @Joinable);
+            (@CreatorId, @Title, @StartDate, @EndDate, @Joinable);
             SELECT LAST_INSERT_ID();";
             return _db.ExecuteScalar<int>(sql, newC);
         }

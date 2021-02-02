@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS challenges
     id INT AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
     startDate DATE NOT NULL,
-    duration INT NOT NULL,
+    endDate DATE NOT NULL,
     creatorId VARCHAR(255) NOT NULL,
     joinable TINYINT NOT NULL,
     PRIMARY KEY (id)
