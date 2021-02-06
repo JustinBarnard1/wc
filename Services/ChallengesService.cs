@@ -13,22 +13,28 @@ namespace Keepr.Services
             _repo = repo;
         }
 
+        //ANCHOR Creates a new challenge.
         internal Challenge Create(Challenge newC)
         {
             newC.Id = _repo.Create(newC);
             return newC;
         }
 
+        //ANCHOR Gets a list of all Challenges
         internal IEnumerable<Challenge> GetAll()
         {
             return _repo.GetAll();
         }
 
+        //ANCHOR Gets a single challenge by it's Id
         internal Challenge GetById(string id)
         {
             return _repo.GetById(id);
         }
 
+        //ANCHOR Checks to make sure Id belongs to a valid Challenge
+        //ANCHOR Checks to make sure that User is the Creator
+        //ANCHOR Changes Joinable bool property.
         internal Challenge Joinable(int id, Profile userInfo, Challenge editChallenge)
         {
             Challenge challenge = _repo.GetById(id.ToString());
