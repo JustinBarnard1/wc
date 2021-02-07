@@ -16,12 +16,16 @@ namespace Keepr.Services
             _cRepo = cRepo;
         }
 
+        //ANCHOR Creates a new Participant with a Pending status on
+        //ANCHOR if they have been accepted into the challenge.
         internal Participant Create(Participant newParticipant)
         {
             newParticipant.Id = _repo.Create(newParticipant);
             return newParticipant;
         }
 
+        //ANCHOR Gets list of all Participants of a specific Challenge
+        //ANCHOR Makes sure that Challenge exists first.
         internal IEnumerable<Participant> GetAllParticipantsByChallengeId(string userId, int challengeId)
         {
             Challenge challenge = _cRepo.GetById(challengeId.ToString());
@@ -29,6 +33,7 @@ namespace Keepr.Services
             return _repo.GetAllParticipantsByChallengeId(challengeId).ToList();
         }
 
+        //ANCHOR Gets a specific Participant of a specific Challenge.
         internal Participant GetParticipant(string userId, int challengeId, int participantId)
         {
             Challenge challenge = _cRepo.GetById(challengeId.ToString());
@@ -37,6 +42,10 @@ namespace Keepr.Services
 
         }
 
+        //ANCHOR Accepts/Denies a participant's entry request into a challenge
+        //ANCHOR Checks if user is creator of challenge
+        //ANCHOR Checks if Challenge exists
+        //ANCHOR Checks if Participant exists
         internal VMParticipant AcceptOrDenyParticipant(string userId, VMParticipant participant)
         {
             Challenge challenge = _cRepo.GetById(participant.ChallengeId);
