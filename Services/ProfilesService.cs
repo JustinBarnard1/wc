@@ -11,6 +11,8 @@ namespace Keepr.Services
         {
             _repo = repo;
         }
+
+        //ANCHOR Gets user's profile, if doesn't exists creates one.
         internal Profile GetOrCreateProfile(Profile userInfo)
         {
             Profile profile = _repo.GetById(userInfo.Id);
@@ -21,6 +23,8 @@ namespace Keepr.Services
             return profile;
         }
 
+        //ANCHOR Checks if profile is valid, Checks if user is owner of
+        //ANCHOR of the profile, edits name and/or picture.
         internal Profile Edit(int id, Profile userInfo, Profile editProfile)
         {
             Profile profile = _repo.GetById(id.ToString());
