@@ -15,6 +15,7 @@ namespace Keepr.Repositories
             _db = db;
         }
 
+        //ANCHOR Creates a new Challenge
         internal int Create(Challenge newC)
         {
             string sql = @"
@@ -26,6 +27,7 @@ namespace Keepr.Repositories
             return _db.ExecuteScalar<int>(sql, newC);
         }
 
+        //ANCHOR Get a challenge by its ID
         internal Challenge GetById(string queryId)
         {
             string sql = @"
@@ -42,6 +44,8 @@ namespace Keepr.Repositories
             }, new { queryId }, splitOn: "id").FirstOrDefault();
         }
 
+        //ANCHOR Gets all challenges
+        //FIXME Do you want this to filter out non Joinable Challenges?
         internal IEnumerable<Challenge> GetAll()
         {
             string sql = @"
@@ -57,6 +61,7 @@ namespace Keepr.Repositories
             }, splitOn: "id");
         }
 
+        //ANCHOR This edits a challenge to make Joinable = True
         internal Challenge Joinable(Challenge editChallenge)
         {
             string sql = @"
