@@ -15,6 +15,7 @@ namespace Keepr.Services
             _cRepo = cRepo;
         }
 
+        //ANCHOR Creates a new base challenge
         internal RuleDetails Create(Profile user, RuleDetails newRule)
         {
             Challenge challenge = _cRepo.GetById(newRule.ChallengeId);
@@ -23,6 +24,7 @@ namespace Keepr.Services
             return newRule;
         }
 
+        //ANCHOR Gets all rules by Challenge ID
         internal IEnumerable<RuleDetails> GetAllRulesByChallengeId(Profile user, int challengeId)
         {
             Challenge challenge = _cRepo.GetById(challengeId.ToString());
