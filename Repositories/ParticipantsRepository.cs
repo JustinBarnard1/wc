@@ -65,6 +65,7 @@ namespace Keepr.Repositories
             }, new { challengeId }, splitOn: "id").FirstOrDefault();
         }
 
+        //ANCHOR Gets participant by ID
         internal Participant GetSelectedParticipant(int id)
         {
             string sql = @"
@@ -82,6 +83,7 @@ namespace Keepr.Repositories
             }, new { id }, splitOn: "id").FirstOrDefault();
         }
 
+        //ANCHOR Accepts/Denies a participants access to a challenge.
         internal VMParticipant AcceptOrDenyParticipant(VMParticipant participant)
         {
             string sql = @"
