@@ -15,6 +15,8 @@ namespace Keepr.Repositories
             _db = db;
         }
 
+        //ANCHOR Creates a new participant that has not been accepted
+        //ANCHOR into the challenge yet.
         internal int Create(Participant newParticipant)
         {
             string sql = @"
@@ -26,6 +28,7 @@ namespace Keepr.Repositories
             return _db.ExecuteScalar<int>(sql, newParticipant);
         }
 
+        //ANCHOR Gets all participants by Challenge ID
         internal IEnumerable<Participant> GetAllParticipantsByChallengeId(int challengeId)
         {
             string sql = @"
@@ -42,6 +45,8 @@ namespace Keepr.Repositories
             }, new { challengeId }, splitOn: "id");
         }
 
+        //ANCHOR Gets a participant by challenge ID and participant ID
+        //FIXME Does this need both challengeId and participantId
         internal Participant GetParticipant(int challengeId, int participantId)
         {
             string sql = @"
