@@ -14,12 +14,14 @@ namespace Keepr.Repositories
             _db = db;
         }
 
+        //ANCHOR Gets a Profile by Id
         internal Profile GetById(string id)
         {
             string sql = "SELECT * FROM profiles WHERE id = @id";
             return _db.QueryFirstOrDefault<Profile>(sql, new { id });
         }
 
+        //ANCHOR Creates a new profile.
         internal Profile Create(Profile newProfile)
         {
             string sql = @"
@@ -31,6 +33,7 @@ namespace Keepr.Repositories
             return newProfile;
         }
 
+        //ANCHOR Edits an existing profile
         internal Profile Edit(Profile editProfile)
         {
             string sql = @"
