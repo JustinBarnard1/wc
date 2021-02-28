@@ -14,6 +14,7 @@ namespace Keepr.Repositories
             _db = db;
         }
 
+        //ANCHOR Gets all rules by challenge Id
         internal IEnumerable<RuleDetails> GetAllRulesByChallengeId(int challengeId)
         {
             string sql = @"
@@ -30,6 +31,7 @@ namespace Keepr.Repositories
             }, new { challengeId }, splitOn: "id");
         }
 
+        //ANCHOR Creates a new rule for a Challenge.
         internal int CreateNewRule(RuleDetails newRule)
         {
             string sql = @"
