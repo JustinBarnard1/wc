@@ -21,7 +21,6 @@ namespace Keepr.Controllers
         //ANCHOR after a Participant has been accepted into the Challenge
         //ANCHOR this part is in DPSServices
 
-
         //ANCHOR Changes point totals for one or many days at a time
         public async Task<ActionResult<IEnumerable<DailyPoints>>> UpdatePoints(int id, [FromBody] DailyPoints pointsUpdate)
         {
