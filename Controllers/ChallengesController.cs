@@ -67,7 +67,7 @@ namespace Keepr.Controllers
             }
         }
 
-        //ANCHOR Gets all participants of a challenge.
+        //ANCHOR Gets all participants of a single challenge.
         [HttpGet("{id}/participants")]
         [Authorize]
         public async Task<ActionResult<IEnumerable<Participant>>> GetAllByChallengeId(int id)
