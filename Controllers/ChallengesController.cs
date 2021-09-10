@@ -37,7 +37,7 @@ namespace Keepr.Controllers
         }
 
 
-        //ANCHOR Do I need a gets a specific challenge.
+        //ANCHOR Do I need a gets a specific challenge or filter on front end.
         //ANCHOR Maybe add a gets all Challenges created by a specific user.
         //ANCHOR OR just filter the info that comes back from a get all for all
         //ANCHOR challenges that are created by a specific user.
