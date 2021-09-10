@@ -36,6 +36,11 @@ namespace Keepr.Controllers
             }
         }
 
+
+        //ANCHOR Do I need a gets a specific challenge
+        //ANCHOR Maybe add a gets all Challenges created by a specific user
+
+
         //ANCHOR This gets a specific challenge.
         [HttpGet("{id}")]
         public ActionResult<IEnumerable<Challenge>> GetById(string id)
