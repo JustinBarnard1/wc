@@ -9,4 +9,6 @@ namespace Keepr.Models
         public string CreatorId { get; set; }
         public bool Joinable { get; set; }
     }
+
+    //ANCHOR Should I add a Started bool
 }
