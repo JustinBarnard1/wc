@@ -1,4 +1,6 @@
+using System;
 using System.Data;
+using Keepr.Models;
 
 namespace Keepr.Repositories
 {
@@ -8,6 +10,11 @@ namespace Keepr.Repositories
         public DailyPointsRepository(IDbConnection db)
         {
             _db = db;
+        }
+
+        internal int Create(DailyPoints newDPS)
+        {
+            throw new NotImplementedException();
         }
     }
 }
