@@ -14,6 +14,7 @@ namespace Keepr.Services
         //ANCHOR Creates Daily Points Sheets Or DPS
         //ANCHOR Needs to create all Daily Point Sheets for
         //ANCHOR all the accepted participants
+        //ANCHOR Needs grab all participants
         internal DailyPoints Create(DailyPoints newDPS)
         {
             newDPS.Id = _repo.Create(newDPS);
