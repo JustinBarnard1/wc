@@ -15,11 +15,13 @@ namespace Keepr.Controllers
         private readonly ChallengesService _cs;
         private readonly ParticipantsService _ps;
         private readonly RuleDetailsService _rs;
-        public ChallengesController(ChallengesService cs, ParticipantsService ps, RuleDetailsService rs)
+        private readonly DailyPointsService _dps;
+        public ChallengesController(ChallengesService cs, ParticipantsService ps, RuleDetailsService rs, DailyPointsService dps)
         {
             _cs = cs;
             _ps = ps;
             _rs = rs;
+            _dps = dps;
         }
 
         //ANCHOR This gets all created challenges.
@@ -137,6 +139,24 @@ namespace Keepr.Controllers
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
                 editChallenge.Id = id;
                 return Ok(_cs.Joinable(id, userInfo, editChallenge));
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        //ANCHOR Starts the challenge and creates Daily Point Sheets
+        //ANCHOR for all accepted participants.
+        [HttpPut("{id")]
+        [Authorize]
+        public async Task<ActionResult<Challenge>> StartChallenge(int id, [FromBody] Challenge editChallenge)
+        {
+            try
+            {
+                Profile userinfo = await HttpContext.GetUserInfoAsync<Profile>();
+                editChallenge.Id = id;
+                return Ok();
             }
             catch (System.Exception e)
             {

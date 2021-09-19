@@ -8,7 +8,6 @@ namespace Keepr.Models
         public string EndDate { get; set; }
         public string CreatorId { get; set; }
         public bool Joinable { get; set; }
+        public bool HasStarted { get; set; }
     }
-
-    //ANCHOR Should I add a Started bool
 }
