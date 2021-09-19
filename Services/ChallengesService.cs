@@ -44,6 +44,7 @@ namespace Keepr.Services
             editChallenge.StartDate = challenge.StartDate;
             editChallenge.EndDate = challenge.EndDate;
             editChallenge.CreatorId = challenge.CreatorId;
+            editChallenge.HasStarted = challenge.HasStarted;
             return _repo.Joinable(editChallenge);
 
         }
