@@ -63,6 +63,8 @@ namespace Keepr
             services.AddTransient<ParticipantsRepository>();
             services.AddTransient<RuleDetailsService>();
             services.AddTransient<RuleDetailsRepository>();
+            services.AddTransient<DailyPointsService>();
+            services.AddTransient<DailyPointsRepository>();
         }
 
         private IDbConnection CreateDbConnection()
