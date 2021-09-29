@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
 using Keepr.Models;
 using Keepr.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Controllers
@@ -23,6 +24,8 @@ namespace Keepr.Controllers
 
 
         //ANCHOR Changes point totals for one or many days at a time
+        [HttpPut("{id}")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<DailyPoints>>> UpdatePoints(int id, [FromBody] DailyPoints pointsUpdate)
         {
             try
