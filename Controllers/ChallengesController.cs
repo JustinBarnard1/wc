@@ -148,7 +148,7 @@ namespace Keepr.Controllers
 
         //ANCHOR Starts the challenge and creates Daily Point Sheets
         //ANCHOR for all accepted participants.
-        [HttpPut("{id")]
+        [HttpPut("{id}")]
         [Authorize]
         public async Task<ActionResult<Challenge>> StartChallenge(int id, [FromBody] Challenge editChallenge)
         {
