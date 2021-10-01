@@ -43,3 +43,14 @@ CREATE TABLE IF NOT EXISTS rules
     weekly TINYINT NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE IF NOT EXISTS dpoints
+(
+    id INT AUTO_INCREMENT,
+    rulesId VARCHAR(255) NOT NULL,
+    challengeId VARCHAR(255) NOT NULL,
+    participantId VARCHAR(255) NOT NULL,
+    day INT NOT NULL,
+    points INT NOT NULL DEFAULT 0,
+    PRIMARY KEY (id)
+);
