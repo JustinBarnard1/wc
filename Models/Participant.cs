@@ -10,6 +10,7 @@ namespace Keepr.Models
         public bool AddedToChallenge { get; set; }
     }
 
+    //ANCHOR Does AcceptOrDeny need to be added to database? No?
     public class VMParticipant : Participant
     {
         public int AcceptOrDeny { get; set; }
