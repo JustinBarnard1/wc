@@ -1,4 +1,8 @@
-/* DROP TABLE rules; */
+/* DROP TABLE rules;
+DROP TABLE challenges;
+DROP TABLE participants;
+DROP TABLE rules;
+DROP TABLE dpoints; */
 
 CREATE TABLE IF NOT EXISTS profiles
 (
