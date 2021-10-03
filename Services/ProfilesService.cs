@@ -24,7 +24,7 @@ namespace Keepr.Services
         }
 
         //ANCHOR Checks if profile is valid, Checks if user is owner of
-        //ANCHOR of the profile, edits name and/or picture.
+        //ANCHOR of the profile, edits name and/or picture
         internal Profile Edit(int id, Profile userInfo, Profile editProfile)
         {
             Profile profile = _repo.GetById(id.ToString());
