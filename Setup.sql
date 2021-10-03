@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS dpoints
     rulesId VARCHAR(255) NOT NULL,
     challengeId VARCHAR(255) NOT NULL,
     participantId VARCHAR(255) NOT NULL,
-    day INT NOT NULL,
+    theDay INT NOT NULL,
     points INT NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
