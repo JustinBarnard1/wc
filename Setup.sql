@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS challenges
     startDate DATE NOT NULL,
     endDate DATE NOT NULL,
     creatorId VARCHAR(255) NOT NULL,
-    joinable TINYINT NOT NULL,
-    hasStarted TINYINT NOT NULL,
+    joinable TINYINT DEFAULT 0,
+    hasStarted TINYINT DEFAULT 0,
     PRIMARY KEY (id)
 );
 

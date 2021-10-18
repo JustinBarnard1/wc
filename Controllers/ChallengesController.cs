@@ -134,6 +134,7 @@ namespace Keepr.Controllers
         [Authorize]
         public async Task<ActionResult<Challenge>> Joinable(int id, [FromBody] Challenge editChallenge)
         {
+            if(editChallenge.Joinable == true){
             try
             {
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
@@ -144,14 +145,10 @@ namespace Keepr.Controllers
             {
                 return BadRequest(e.Message);
             }
-        }
-
+            }
+            else{
         //ANCHOR Starts the challenge and creates Daily Point Sheets
         //ANCHOR for all accepted participants.
-        [HttpPut("{id}")]
-        [Authorize]
-        public async Task<ActionResult<Challenge>> StartChallenge(int id, [FromBody] Challenge editChallenge)
-        {
             try
             {
                 Profile userinfo = await HttpContext.GetUserInfoAsync<Profile>();
@@ -161,7 +158,7 @@ namespace Keepr.Controllers
             catch (System.Exception e)
             {
                 return BadRequest(e.Message);
-            }
+            }}
         }
     }
 }
