@@ -37,15 +37,16 @@ namespace Keepr.Controllers
         }
 
         //ANCHOR Edit's a User's profile information.
-        [HttpPut("{id}")]
+        [HttpPut]
         [Authorize]
-        public async Task<ActionResult<Profile>> Edit(int id, [FromBody] Profile editProfile)
+        public async Task<ActionResult<Profile>> Edit([FromBody] Profile editProfile)
         {
             try
             {
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-                editProfile.Id = id.ToString();
-                return Ok(_ps.Edit(id, userInfo, editProfile));
+                editProfile.Id = userInfo.Id;
+                editProfile.Email = userInfo.Email;
+                return Ok(_ps.Edit(editProfile.Id, userInfo, editProfile));
             }
             catch (System.Exception e)
             {
