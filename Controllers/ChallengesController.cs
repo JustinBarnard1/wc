@@ -130,6 +130,9 @@ namespace Keepr.Controllers
 
         //ANCHOR Edits challenge to finalize creation of challenge
         //ANCHOR allows users to apply to join as a participant.
+        //ANCHOR OR
+        //ANCHOR Starts the challenge and creates Daily Point Sheets
+        //ANCHOR for all accepted participants.
         [HttpPut("{id}")]
         [Authorize]
         public async Task<ActionResult<Challenge>> Joinable(int id, [FromBody] Challenge editChallenge)
