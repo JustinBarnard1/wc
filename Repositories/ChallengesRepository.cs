@@ -73,6 +73,19 @@ namespace Keepr.Repositories
             return editChallenge;
         }
 
+        //ANCHOR This editss a challenge to make HasStarted = True as
+        //ANCHOR long as Joinable = True
+        // internal Challenge Starting(Challenge editChallenge)
+        // {
+        //     string sql = @"
+        //     UPDATE challenges
+        //     SET
+        //     hasStarted = @HasStarted
+        //     WHERE id = @Id;";
+        //     _db.Execute(sql, editChallenge);
+        //     return editChallenge;
+        // }
+
         //ANCHOR This edits a challenge Title Start or End that
         //ANCHOR is not already joinable or hasstarted
         internal Challenge EditYourChallenge(Challenge editChallenge)

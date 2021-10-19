@@ -54,6 +54,7 @@ namespace Keepr.Services
             Challenge challenge = _repo.GetById(id.ToString());
             if(challenge == null){throw new Exception("Invalid Challenge Id");}
             if(userInfo.Id != challenge.CreatorId){throw new Exception("This is not yours");}
+            if(challenge.Joinable == true){throw new Exception("This Challenge has already been finalized");}
             editChallenge.Joinable = challenge.Joinable;
             editChallenge.HasStarted = challenge.HasStarted;
             editChallenge.CreatorId = challenge.CreatorId;
