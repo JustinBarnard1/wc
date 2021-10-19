@@ -19,6 +19,7 @@ namespace Keepr.Services
         internal RuleDetails Create(Profile user, RuleDetails newRule)
         {
             Challenge challenge = _cRepo.GetById(newRule.ChallengeId);
+            if(challenge.Joinable == true || challenge.HasStarted == true) {throw new Exception("This Challenge has already been finalized");}
             if (user.Id != challenge.CreatorId) { throw new Exception("This Is Not Yours"); }
             newRule.Id = _repo.CreateNewRule(newRule);
             return newRule;
