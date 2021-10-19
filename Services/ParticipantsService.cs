@@ -21,7 +21,7 @@ namespace Keepr.Services
         {
             List<Participant> participantList = _repo.GetAllParticipantsByChallengeId(newParticipant.ChallengeId).ToList();
             for(int i = 0; i < participantList.Count-1; i++){
-                if(participantList[i].ProfileId == newParticipant.ProfileId)
+                if(participantList[i].ProfileId == newParticipant.ProfileId && participantList[i].PendingAddToChallenge == true)
                 {
                 throw new Exception("Participant already exists");
                 }
