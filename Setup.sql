@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS participants
 (
     id INT AUTO_INCREMENT,
     profileId VARCHAR(255) NOT NULL,
-    challengeId VARCHAR(255) NOT NULL,
+    challengeId INT NOT NULL,
     pendingAddToChallenge TINYINT DEFAULT 1,
     addedToChallenge TINYINT DEFAULT NULL,
     PRIMARY KEY (id)

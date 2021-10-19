@@ -32,6 +32,7 @@ namespace Keepr.Controllers
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
                 newParticipant.ProfileId = userInfo.Id;
                 newParticipant.Creator = userInfo;
+                newParticipant.PendingAddToChallenge = true;
                 Participant created = _ps.Create(newParticipant);
                 return Ok(created);
             }

@@ -85,7 +85,6 @@ namespace Keepr.Controllers
             {
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
                 return Ok(_ps.GetAllParticipantsByChallengeId(userInfo?.Id, id));
-
             }
             catch (System.Exception e)
             {

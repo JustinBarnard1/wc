@@ -16,10 +16,16 @@ namespace Keepr.Services
             _cRepo = cRepo;
         }
 
-        //ANCHOR Creates a new Participant with a Pending status on
-        //ANCHOR if they have been accepted into the challenge.
+        //ANCHOR Creates a new Participant with a Pending  acception status
         internal Participant Create(Participant newParticipant)
         {
+            List<Participant> participantList = _repo.GetAllParticipantsByChallengeId(newParticipant.ChallengeId).ToList();
+            for(int i = 0; i < participantList.Count-1; i++){
+                if(participantList[i].ProfileId == newParticipant.ProfileId)
+                {
+                throw new Exception("Participant already exists");
+                }
+            }
             newParticipant.Id = _repo.Create(newParticipant);
             return newParticipant;
         }
@@ -48,7 +54,7 @@ namespace Keepr.Services
         //ANCHOR Checks if Participant exists
         internal VMParticipant AcceptOrDenyParticipant(string userId, VMParticipant participant)
         {
-            Challenge challenge = _cRepo.GetById(participant.ChallengeId);
+            Challenge challenge = _cRepo.GetById(participant.ChallengeId.ToString());
             Participant original = _repo.GetSelectedParticipant(participant.Id);
             if (challenge.CreatorId != userId) { throw new Exception("You Do Not Have The Authority For This"); }
             if (challenge == null) { throw new Exception("Challenge Does Not Exist"); }
