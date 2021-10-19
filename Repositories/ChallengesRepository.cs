@@ -72,5 +72,20 @@ namespace Keepr.Repositories
             _db.Execute(sql, editChallenge);
             return editChallenge;
         }
+
+        //ANCHOR This edits a challenge Title Start or End that
+        //ANCHOR is not already joinable or hasstarted
+        internal Challenge EditYourChallenge(Challenge editChallenge)
+        {
+            string sql = @"
+            UPDATE challenges
+            SET
+            title = @Title,
+            startDate = @StartDate,
+            endDate = @EndDate
+            WHERE id = @Id;";
+            _db.Execute(sql, editChallenge);
+            return editChallenge;
+        }
     }
 }

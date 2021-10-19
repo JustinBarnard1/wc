@@ -149,19 +149,31 @@ namespace Keepr.Controllers
                 return BadRequest(e.Message);
             }
             }
-            else{
+            else if(editChallenge.HasStarted == true){
         //ANCHOR Starts the challenge and creates Daily Point Sheets
         //ANCHOR for all accepted participants.
             try
             {
                 Profile userinfo = await HttpContext.GetUserInfoAsync<Profile>();
                 editChallenge.Id = id;
-                return Ok();
+                return Ok("has started");
             }
             catch (System.Exception e)
             {
                 return BadRequest(e.Message);
             }}
+            else{
+                try
+                {
+                     Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                     editChallenge.Id = id;
+                     return Ok(_cs.EditYourChallenge(id, userInfo, editChallenge));
+                }
+                catch (System.Exception e)
+                {
+                    return BadRequest(e.Message);
+                }
+            }
         }
     }
 }
