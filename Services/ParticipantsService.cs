@@ -21,8 +21,8 @@ namespace Keepr.Services
         internal Participant Create(Participant newParticipant)
         {
             Challenge currentChallenge = _cs.GetById(newParticipant.ChallengeId.ToString());
-            if(currentChallenge.Joinable == false){throw new Exception("This Challenge is not yet joinable");}
             if(currentChallenge.HasStarted == true){throw new Exception("This Challenge has already started");}
+            if(currentChallenge.Joinable == false){throw new Exception("This Challenge is not yet joinable");}
             List<Participant> participantList = _repo.GetAllParticipantsByChallengeId(newParticipant.ChallengeId).ToList();
             for(int i = 0; i < participantList.Count; i++){
                 if(participantList[i].ProfileId == newParticipant.ProfileId && participantList[i].PendingAddToChallenge == true || participantList[i].ProfileId == newParticipant.ProfileId && participantList[i].AddedToChallenge == true)

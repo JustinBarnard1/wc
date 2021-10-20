@@ -41,6 +41,8 @@ namespace Keepr.Services
         {
             Challenge challenge = _repo.GetById(id.ToString());
             if (challenge == null) { throw new Exception("Invalid Challenge Id"); }
+            if(challenge.Joinable == true){throw new Exception("This is already finalized");}
+            if(challenge.HasStarted == true){throw new Exception("This Challenge has already started");}
             if (userInfo.Id != challenge.CreatorId) { throw new Exception("This is not yours"); }
             editChallenge.Title = challenge.Title;
             editChallenge.StartDate = challenge.StartDate;
@@ -48,7 +50,22 @@ namespace Keepr.Services
             editChallenge.CreatorId = challenge.CreatorId;
             editChallenge.HasStarted = challenge.HasStarted;
             return _repo.Joinable(editChallenge);
+        }
 
+        internal Challenge StartChallenge(int id, Profile userInfo, Challenge editChallenge)
+        {
+            Challenge challenge = _repo.GetById(id.ToString());
+            if(challenge == null){throw new Exception("Invalid Challenge Id");}
+            if(challenge.HasStarted == true){throw new Exception("This Challenge has already started");}
+            if(challenge.Joinable == false){throw new Exception("This Challenge has not been finalized");}
+            if(userInfo.Id != challenge.CreatorId){throw new Exception("This is not yours");}
+            editChallenge.Title = challenge.Title;
+            editChallenge.StartDate = challenge.StartDate;
+            editChallenge.EndDate = challenge.EndDate;
+            editChallenge.CreatorId = challenge.CreatorId;
+            editChallenge.Joinable = false;
+            editChallenge.HasStarted = true;
+            return _repo.StartChallenge(editChallenge);
         }
 
         internal Challenge EditYourChallenge(int id, Profile userInfo, Challenge editChallenge)

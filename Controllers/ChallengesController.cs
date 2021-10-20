@@ -153,9 +153,9 @@ namespace Keepr.Controllers
         //ANCHOR for all accepted participants.
             try
             {
-                Profile userinfo = await HttpContext.GetUserInfoAsync<Profile>();
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
                 editChallenge.Id = id;
-                return Ok("has started");
+                return Ok(_cs.StartChallenge(id, userInfo, editChallenge));
             }
             catch (System.Exception e)
             {
