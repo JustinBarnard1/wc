@@ -1,5 +1,6 @@
 using Keepr.Repositories;
 using Keepr.Models;
+using System;
 
 namespace Keepr.Services
 {
@@ -13,12 +14,20 @@ namespace Keepr.Services
 
         //ANCHOR Creates Daily Points Sheets Or DPS
         //ANCHOR Needs to create all Daily Point Sheets for
-        //ANCHOR all the accepted participants
-        //ANCHOR Needs grab all participants
-        internal DailyPoints Create(DailyPoints newDPS)
+        //ANCHOR the accepted participant 
+        public void CreateSheets(Participant participant, Challenge challenge)
         {
-            newDPS.Id = _repo.Create(newDPS);
-            return newDPS;
+            for(DateTime d = Convert.ToDateTime(challenge.StartDate); d < Convert.ToDateTime(challenge.EndDate); d.AddDays(1))
+            {
+                DailyPoints sheet = new DailyPoints{
+                    Id = 0,
+                    ChallengeId = challenge.Id.ToString(),
+                    ParticipantId = participant.Id.ToString(),
+                    Day = d.ToString(),
+                    Points = 0};
+                _repo.Create(sheet);
+            }
+            // return Ok("created daily point sheets");
         }
     }
 }

@@ -10,10 +10,12 @@ namespace Keepr.Services
     {
         private readonly ParticipantsRepository _repo;
         private readonly ChallengesService _cs;
-        public ParticipantsService(ParticipantsRepository repo, ChallengesService cs)
+        private readonly DailyPointsService _dps;
+        public ParticipantsService(ParticipantsRepository repo, ChallengesService cs, DailyPointsService dps)
         {
             _repo = repo;
             _cs = cs;
+            _dps = dps;
         }
 
         //ANCHOR Creates a new Participant with a Pending acception status
@@ -55,11 +57,12 @@ namespace Keepr.Services
         //ANCHOR Checks if Participant exists
         internal VMParticipant AcceptOrDenyParticipant(string userId, VMParticipant participant)
         {
-            Challenge challenge = _cs.GetById(participant.ChallengeId.ToString());
             Participant original = _repo.GetSelectedParticipant(participant.Id);
-            if (challenge.CreatorId != userId) { throw new Exception("You Do Not Have The Authority For This"); }
             if (original == null) { throw new Exception("Invalid Participant Id"); }
-            //For testing in postman original.Pendi... should be changed to participant.Pendi...
+            if(original.AddedToChallenge == true){throw new Exception("This participant has already been added");}
+            Challenge challenge = _cs.GetById(participant.ChallengeId.ToString());
+            if(challenge.HasStarted == true){throw new Exception("This Challenge has already started");}
+            if (challenge.CreatorId != userId) { throw new Exception("You Do Not Have The Authority For This"); }
             if (original.PendingAddToChallenge == false && original.AddedToChallenge == false) { throw new Exception("User Already Denied Access"); }
             if (original.PendingAddToChallenge == false && original.AddedToChallenge == true) { throw new Exception("User Already Granted Access"); }
             participant.ProfileId = original.ProfileId;
@@ -73,6 +76,7 @@ namespace Keepr.Services
             participant.PendingAddToChallenge = false;
             participant.AddedToChallenge = true;
             //This needs to create all the daily sheets based on challenge start date and duration.
+            _dps.CreateSheets(participant, challenge);
             return _repo.AcceptOrDenyParticipant(participant);
 
         }

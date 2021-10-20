@@ -1,8 +1,7 @@
-/* DROP TABLE rules;
-DROP TABLE challenges;
+/* DROP TABLE dpoints;
 DROP TABLE participants;
 DROP TABLE rules;
-DROP TABLE dpoints; */
+DROP TABLE challenges; */
 
 CREATE TABLE IF NOT EXISTS profiles
 (
@@ -51,10 +50,9 @@ CREATE TABLE IF NOT EXISTS rules
 CREATE TABLE IF NOT EXISTS dpoints
 (
     id INT AUTO_INCREMENT,
-    rulesId VARCHAR(255) NOT NULL,
     challengeId VARCHAR(255) NOT NULL,
     participantId VARCHAR(255) NOT NULL,
-    theDay INT NOT NULL,
+    theDay DATE NOT NULL,
     points INT NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
