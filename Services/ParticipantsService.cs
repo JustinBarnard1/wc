@@ -9,19 +9,23 @@ namespace Keepr.Services
     public class ParticipantsService
     {
         private readonly ParticipantsRepository _repo;
-        private readonly ChallengesRepository _cRepo;
-        public ParticipantsService(ParticipantsRepository repo, ChallengesRepository cRepo)
+        private readonly ChallengesService _cs;
+        public ParticipantsService(ParticipantsRepository repo, ChallengesService cs)
         {
             _repo = repo;
-            _cRepo = cRepo;
+            _cs = cs;
         }
 
-        //ANCHOR Creates a new Participant with a Pending  acception status
+        //ANCHOR Creates a new Participant with a Pending acception status
+        //ANCHOR Checks
         internal Participant Create(Participant newParticipant)
         {
+            Challenge currentChallenge = _cs.GetById(newParticipant.ChallengeId.ToString());
+            if(currentChallenge.Joinable == false){throw new Exception("This Challenge is not yet joinable");}
+            if(currentChallenge.HasStarted == true){throw new Exception("This Challenge has already started");}
             List<Participant> participantList = _repo.GetAllParticipantsByChallengeId(newParticipant.ChallengeId).ToList();
-            for(int i = 0; i < participantList.Count-1; i++){
-                if(participantList[i].ProfileId == newParticipant.ProfileId && participantList[i].PendingAddToChallenge == true)
+            for(int i = 0; i < participantList.Count; i++){
+                if(participantList[i].ProfileId == newParticipant.ProfileId && participantList[i].PendingAddToChallenge == true || participantList[i].ProfileId == newParticipant.ProfileId && participantList[i].AddedToChallenge == true)
                 {
                 throw new Exception("Participant already exists");
                 }
@@ -34,18 +38,15 @@ namespace Keepr.Services
         //ANCHOR Makes sure that Challenge exists first.
         internal IEnumerable<Participant> GetAllParticipantsByChallengeId(string userId, int challengeId)
         {
-            Challenge challenge = _cRepo.GetById(challengeId.ToString());
-            if (challenge == null) { throw new Exception("Invalid Id"); }
+            Challenge challenge = _cs.GetById(challengeId.ToString());
             return _repo.GetAllParticipantsByChallengeId(challengeId).ToList();
         }
 
         //ANCHOR Gets a specific Participant of a specific Challenge.
         internal Participant GetParticipant(string userId, int challengeId, int participantId)
         {
-            Challenge challenge = _cRepo.GetById(challengeId.ToString());
-            if (challenge == null) { throw new Exception("Invalid Challenge Id"); }
+            Challenge challenge = _cs.GetById(challengeId.ToString());
             return _repo.GetParticipant(challengeId, participantId);
-
         }
 
         //ANCHOR Accepts/Denies a participant's entry request into a challenge
@@ -54,10 +55,9 @@ namespace Keepr.Services
         //ANCHOR Checks if Participant exists
         internal VMParticipant AcceptOrDenyParticipant(string userId, VMParticipant participant)
         {
-            Challenge challenge = _cRepo.GetById(participant.ChallengeId.ToString());
+            Challenge challenge = _cs.GetById(participant.ChallengeId.ToString());
             Participant original = _repo.GetSelectedParticipant(participant.Id);
             if (challenge.CreatorId != userId) { throw new Exception("You Do Not Have The Authority For This"); }
-            if (challenge == null) { throw new Exception("Challenge Does Not Exist"); }
             if (original == null) { throw new Exception("Invalid Participant Id"); }
             //For testing in postman original.Pendi... should be changed to participant.Pendi...
             if (original.PendingAddToChallenge == false && original.AddedToChallenge == false) { throw new Exception("User Already Denied Access"); }

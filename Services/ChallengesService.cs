@@ -29,7 +29,9 @@ namespace Keepr.Services
         //ANCHOR Gets a single challenge by it's Id
         internal Challenge GetById(string id)
         {
-            return _repo.GetById(id);
+            Challenge gottenChallenge = _repo.GetById(id);
+            if (gottenChallenge == null) { throw new Exception("Invalid Challenge Id"); }
+            return gottenChallenge;
         }
 
         //ANCHOR Checks to make sure Id belongs to a valid Challenge
