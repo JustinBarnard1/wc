@@ -18,10 +18,19 @@ namespace Keepr.Controllers
             _dps = dps;
         }
 
-        //ANCHOR Create Daily Point Sheets for each day of the Challenge
-        //ANCHOR after a Participant has been accepted into the Challenge
-        //ANCHOR this part is in DPSServices
-
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<DailyPoints>>> GetAllDailyPointSheetsForParticipantByChallengeId([FromBody] int challengeId)
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                return Ok(_dps.GetDpsByChallengeId(userInfo, challengeId));
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
         //ANCHOR Changes point totals for one or many days at a time
         [HttpPut("{id}")]

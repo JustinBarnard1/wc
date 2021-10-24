@@ -1,15 +1,20 @@
 using Keepr.Repositories;
 using Keepr.Models;
 using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace Keepr.Services
 {
     public class DailyPointsService
     {
         private readonly DailyPointsRepository _repo;
-        public DailyPointsService(DailyPointsRepository repo)
+        private readonly ChallengesService _cs;
+        public DailyPointsService(DailyPointsRepository repo, ChallengesService cs)
         {
             _repo = repo;
+            _cs = cs;
         }
 
         //ANCHOR Creates Daily Points Sheets Or DPS
@@ -17,17 +22,25 @@ namespace Keepr.Services
         //ANCHOR the accepted participant 
         public void CreateSheets(Participant participant, Challenge challenge)
         {
-            for(DateTime d = Convert.ToDateTime(challenge.StartDate); d < Convert.ToDateTime(challenge.EndDate); d.AddDays(1))
+            for(DateTime d = Convert.ToDateTime(challenge.StartDate); d < Convert.ToDateTime(challenge.EndDate); d = d.AddDays(1))
             {
+                // DateTime d1 = DateTime.ParseExact(d.ToString(), "yyyy/mm/dd hh:mm:ss tt", CultureInfo.InvariantCulture);
                 DailyPoints sheet = new DailyPoints{
                     Id = 0,
                     ChallengeId = challenge.Id.ToString(),
                     ParticipantId = participant.Id.ToString(),
+                    ProfileId = participant.ProfileId,
                     Day = d.ToString(),
                     Points = 0};
                 _repo.Create(sheet);
             }
-            // return Ok("created daily point sheets");
+            return;
+        }
+
+        internal IEnumerable<DailyPoints> GetDpsByChallengeId(Profile userInfo, int challengeId)
+        {
+            Challenge challenge = _cs.GetById(challengeId.ToString());
+            return _repo.GetDpsByChallengeId(challenge.Id, userInfo.Id);
         }
     }
 }

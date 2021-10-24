@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS dpoints
     id INT AUTO_INCREMENT,
     challengeId VARCHAR(255) NOT NULL,
     participantId VARCHAR(255) NOT NULL,
+    profileId VARCHAR(255) NOT NULL,
     theDay DATE NOT NULL,
     points INT NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
