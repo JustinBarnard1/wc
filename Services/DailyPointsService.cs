@@ -24,13 +24,13 @@ namespace Keepr.Services
         {
             for(DateTime d = Convert.ToDateTime(challenge.StartDate); d < Convert.ToDateTime(challenge.EndDate); d = d.AddDays(1))
             {
-                // DateTime d1 = DateTime.ParseExact(d.ToString(), "yyyy/mm/dd hh:mm:ss tt", CultureInfo.InvariantCulture);
+                // DateTime d1 = DateTime.ParseExact(d.ToString(), "yyyy/mm/dd", CultureInfo.InvariantCulture);
                 DailyPoints sheet = new DailyPoints{
                     Id = 0,
                     ChallengeId = challenge.Id.ToString(),
                     ParticipantId = participant.Id.ToString(),
                     ProfileId = participant.ProfileId,
-                    Day = d.ToString(),
+                    Day = d.ToString("yyyy-M-dd"),
                     Points = 0};
                 _repo.Create(sheet);
             }
@@ -40,7 +40,7 @@ namespace Keepr.Services
         internal IEnumerable<DailyPoints> GetDpsByChallengeId(Profile userInfo, int challengeId)
         {
             Challenge challenge = _cs.GetById(challengeId.ToString());
-            return _repo.GetDpsByChallengeId(challenge.Id, userInfo.Id);
+            return _repo.GetDpsByChallengeId(challenge.Id.ToString(), userInfo.Id);
         }
     }
 }

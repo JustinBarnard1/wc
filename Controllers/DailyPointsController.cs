@@ -19,6 +19,7 @@ namespace Keepr.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<DailyPoints>>> GetAllDailyPointSheetsForParticipantByChallengeId([FromBody] int challengeId)
         {
             try

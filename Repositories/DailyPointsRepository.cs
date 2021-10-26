@@ -26,7 +26,7 @@ namespace Keepr.Repositories
             return _db.ExecuteScalar<int>(sql, newDPS);
         }
 
-        internal IEnumerable<DailyPoints> GetDpsByChallengeId(int challengeId, string profileId)
+        internal IEnumerable<DailyPoints> GetDpsByChallengeId(string challengeId, string profileId)
         {
             string sql = @"
             SELECT
