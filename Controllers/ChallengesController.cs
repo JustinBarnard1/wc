@@ -127,6 +127,21 @@ namespace Keepr.Controllers
             }
         }
 
+        [HttpGet("{id}/dailypoints")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<DailyPoints>>> GetAllDailyPointSheetsForParticipantByChallengeId(int id)
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                return Ok(_dps.GetDpsByChallengeId(userInfo, id.ToString()));
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         //ANCHOR Edits challenge to finalize creation of challenge
         //ANCHOR allows users to apply to join as a participant.
         //ANCHOR OR

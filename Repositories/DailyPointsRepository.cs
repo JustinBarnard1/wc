@@ -26,7 +26,7 @@ namespace Keepr.Repositories
             return _db.ExecuteScalar<int>(sql, newDPS);
         }
 
-        internal IEnumerable<DailyPoints> GetDpsByChallengeId(string challengeId, string profileId)
+        internal IEnumerable<DailyPoints> GetDpsByChallengeId(string challengeId, string profId)
         {
             string sql = @"
             SELECT
@@ -35,8 +35,9 @@ namespace Keepr.Repositories
             FROM dPoints d
             JOIN profiles p ON d.profileId = p.id
             WHERE
-            d.challengeId = @challengeId,
-            d.profileId = @profileId;";
+            d.challengeId = @challengeId
+            AND
+            d.profileId = @profId;";
             return _db.Query<DailyPoints, Profile, DailyPoints>(sql, (dailypoints, profile) =>
             {
                 return dailypoints;

@@ -18,20 +18,20 @@ namespace Keepr.Controllers
             _dps = dps;
         }
 
-        [HttpGet]
-        [Authorize]
-        public async Task<ActionResult<IEnumerable<DailyPoints>>> GetAllDailyPointSheetsForParticipantByChallengeId([FromBody] int challengeId)
-        {
-            try
-            {
-                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-                return Ok(_dps.GetDpsByChallengeId(userInfo, challengeId));
-            }
-            catch (System.Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
+        // [HttpGet("{id}")]
+        // [Authorize]
+        // public async Task<ActionResult<IEnumerable<DailyPoints>>> GetAllDailyPointSheetsForParticipantByChallengeId(string id)
+        // {
+        //     try
+        //     {
+        //         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        //         return Ok(_dps.GetDpsByChallengeId(userInfo, id));
+        //     }
+        //     catch (System.Exception e)
+        //     {
+        //         return BadRequest(e.Message);
+        //     }
+        // }
 
         //ANCHOR Changes point totals for one or many days at a time
         [HttpPut("{id}")]

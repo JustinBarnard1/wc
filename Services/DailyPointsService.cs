@@ -37,9 +37,9 @@ namespace Keepr.Services
             return;
         }
 
-        internal IEnumerable<DailyPoints> GetDpsByChallengeId(Profile userInfo, int challengeId)
+        internal IEnumerable<DailyPoints> GetDpsByChallengeId(Profile userInfo, string challengeId)
         {
-            Challenge challenge = _cs.GetById(challengeId.ToString());
+            Challenge challenge = _cs.GetById(challengeId);
             return _repo.GetDpsByChallengeId(challenge.Id.ToString(), userInfo.Id);
         }
     }
