@@ -30,7 +30,7 @@ namespace Keepr.Services
                     ChallengeId = challenge.Id.ToString(),
                     ParticipantId = participant.Id.ToString(),
                     ProfileId = participant.ProfileId,
-                    Day = d.ToString("yyyy-M-dd"),
+                    theDay = d.ToString("yyyy-M-dd"),
                     Points = 0};
                 _repo.Create(sheet);
             }

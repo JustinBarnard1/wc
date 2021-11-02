@@ -6,7 +6,7 @@ namespace Keepr.Models
         public string ChallengeId { get; set; }
         public string ParticipantId { get; set; }
         public string ProfileId { get; set; }
-        public string Day { get; set; }
+        public string theDay { get; set; }
         public int Points { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace Keepr.Repositories
             INSERT INTO dpoints
             (challengeId, participantId, profileId, theDay)
             VALUES
-            (@ChallengeId, @ParticipantId, @ProfileId, @Day);
+            (@ChallengeId, @ParticipantId, @ProfileId, @TheDay);
             SELECT LAST_INSERT_ID();";
             return _db.ExecuteScalar<int>(sql, newDPS);
         }
@@ -40,8 +40,9 @@ namespace Keepr.Repositories
             d.profileId = @profId;";
             return _db.Query<DailyPoints, Profile, DailyPoints>(sql, (dailypoints, profile) =>
             {
+                // dailypoints.theDay = dailypoints.theDay.ToString("yyyy-MM-dd");
                 return dailypoints;
-            }, new {challengeId}, splitOn:"id");
+            }, new {challengeId, profId}, splitOn:"id");
         }
     }
 }
