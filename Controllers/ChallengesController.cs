@@ -142,6 +142,21 @@ namespace Keepr.Controllers
             }
         }
 
+        [HttpGet("{cid}/dailypoints/{did}")]
+        [Authorize]
+        public async Task<ActionResult<DailyPoints>> UpdateDailyPointSheet(int cid, int did, [FromBody] DailyPoints editDailyPoints)
+        {
+            try
+            {
+                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                 return Ok(_dps.UpdateDpsById(userInfo, cid.ToString(), did.ToString()));
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         //ANCHOR Edits challenge to finalize creation of challenge
         //ANCHOR allows users to apply to join as a participant.
         //ANCHOR OR

@@ -42,5 +42,14 @@ namespace Keepr.Services
             Challenge challenge = _cs.GetById(challengeId);
             return _repo.GetDpsByChallengeId(challenge.Id.ToString(), userInfo.Id);
         }
+
+        internal DailyPoints UpdateDpsById(Profile userInfo, string cid, string did)
+        {
+            Challenge challenge = _cs.GetById(challengeId);
+            //check user is owner of dps
+            //grab the rules
+            //check FromBody against Min/Max
+            //update and return
+        }
     }
 }
