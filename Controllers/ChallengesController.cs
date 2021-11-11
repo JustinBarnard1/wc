@@ -142,7 +142,7 @@ namespace Keepr.Controllers
             }
         }
 
-        [HttpGet("{cid}/dailypoints/{did}")]
+        [HttpPut("{cid}/dailypoints/{did}")]
         [Authorize]
         public async Task<ActionResult<DailyPoints>> UpdateDailyPointSheet(int cid, int did, [FromBody] DailyPoints editDailyPoints)
         {
