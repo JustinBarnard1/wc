@@ -44,5 +44,32 @@ namespace Keepr.Repositories
                 return dailypoints;
             }, new {challengeId, profId}, splitOn:"id");
         }
+
+        //GetByDPSId
+        internal DailyPoints GetDpsById(string id)
+        {
+            string sql = @"
+            SELECT
+            d.*,
+            p.*
+            FROM
+            dPoints d
+            JOIN profiles p ON d.profileId = p.Id
+            WHERE
+            d.Id = @id;";
+            return _db.Query<DailyPoints, Profile, DailyPoints>(sql, (dailypoints, profile) =>
+            {return dailypoints;}, new {id}, splitOn: "id").FirstOrDefault();
+        }
+        //UpdateDps
+        internal DailyPoints UpdateDpsById(DailyPoints edit)
+        {
+            string sql = @"
+            UPDATE dpoints
+            SET
+            points = @Points
+            WHERE id = @id;";
+            _db.Execute(sql, edit);
+            return edit;
+        }
     }
 }

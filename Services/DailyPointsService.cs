@@ -45,11 +45,12 @@ namespace Keepr.Services
 
         internal DailyPoints UpdateDpsById(Profile userInfo, string cid, string did, DailyPoints editDailyPoints)
         {
-            Challenge challenge = _cs.GetById(challengeId);
-            //check user is owner of dps
-            //grab the rules
-            //check FromBody against Min/Max
-            //update and return
+            Challenge challenge = _cs.GetById(cid);
+            DailyPoints dPoints = _repo.GetDpsById(did);
+            if(dPoints == null){throw new Exception("This sheet does not exist");}
+            if(userInfo.Id != dPoints.ProfileId){throw new Exception("This is not your daily point sheet");}
+            dPoints.Points = editDailyPoints.Points;
+            return _repo.UpdateDpsById(dPoints);
         }
     }
 }
