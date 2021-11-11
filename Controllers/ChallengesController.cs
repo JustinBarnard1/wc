@@ -149,7 +149,7 @@ namespace Keepr.Controllers
             try
             {
                  Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-                 return Ok(_dps.UpdateDpsById(userInfo, cid.ToString(), did.ToString()));
+                 return Ok(_dps.UpdateDpsById(userInfo, cid.ToString(), did.ToString(), editDailyPoints));
             }
             catch (System.Exception e)
             {
