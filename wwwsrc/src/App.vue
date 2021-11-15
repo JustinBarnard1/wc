@@ -17,6 +17,7 @@ export default {
       setBearer(this.$auth.bearer);
       this.$store.dispatch("getProfile");
       //NOTE if you want to do something everytime the user logs in, do so here
+      //ANCHOR Add timestamp to Profile on Login for Last Login/Last Online
     }
   },
   components: {
