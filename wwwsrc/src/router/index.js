@@ -22,27 +22,27 @@ const routes = [
     path: "/leaderboard",
     name: "Leaderboard",
     component: Leaderboard,
-  },
-  {
-    path: "/create",
-    name: "Create",
-    component: Create,
-  },
-  {
-    path: "/join",
-    name: "Join",
-    component: Join,
-  },
-  {
-    path: "/profile",
-    name: "Profile",
-    component: Profile,
-  },
-  {
-    path: "/log",
-    name: "Log",
-    component: Log,
   }
+  // {
+  //   path: "/create",
+  //   name: "Create",
+  //   component: Create,
+  // },
+  // {
+  //   path: "/join",
+  //   name: "Join",
+  //   component: Join,
+  // },
+  // {
+  //   path: "/profile",
+  //   name: "Profile",
+  //   component: Profile,
+  // },
+  // {
+  //   path: "/log",
+  //   name: "Log",
+  //   component: Log,
+  // }
 ];
 
 const router = new VueRouter({
